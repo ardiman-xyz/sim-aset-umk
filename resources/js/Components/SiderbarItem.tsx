@@ -55,9 +55,9 @@ const SidebarItem = ({
             <Link
                 href={href || "#"}
                 className={cn(
-                    "flex items-center gap-x-2 text-slate-500 text-sm font-[500] pl-6 transition-all ease-in-out hover:text-slate-600 hover:bg-slate-300/20 ",
+                    "flex items-center gap-x-2 text-slate-500 text-sm font-[500] transition-all ease-in-out hover:text-slate-600 hover:bg-slate-300/20 ",
                     isActive &&
-                    "text-sky-700 bg-sky-200/20 hover:bg-sky-200/20 hover:text-sky-700"
+                    "text-orange-700 bg-orange-200/20 hover:bg-orange-200/20 hover:text-orange-700"
                 )}
                 onClick={(e) => {
                     if (children) {
@@ -66,23 +66,24 @@ const SidebarItem = ({
                     }
                 }}
             >
-                <div className={`flex items-center gap-x-2 py-4`}>
+                <div
+                    className={cn(
+                        "opacity-0 border-2 border-orange-500 h-full transition-all",
+                        isActive && "opacity-100"
+                    )}
+                />
+                <div className={`flex items-center gap-x-2 py-3 pl-3`}>
                     <Icon
                         size={22}
                         className={cn(
                             "text-slate-500",
-                            isActive && "text-sky-700"
+                            isActive && "text-orange-500"
                         )}
                     />
                     {label}
                 </div>
-                <div
-                    className={cn(
-                        "ml-auto opacity-0 border-2 border-sky-700 h-full transition-all",
-                        isActive && "opacity-100"
-                    )}
-                />
-                {children && <ChevronDown className="h-5 w-5 mr-3" />}
+
+                {children && <ChevronDown className="h-5 w-5 mr-3"/>}
             </Link>
 
             <div className="pl-5">

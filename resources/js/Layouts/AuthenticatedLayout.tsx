@@ -1,4 +1,4 @@
-import React, { useState, PropsWithChildren, ReactNode } from 'react';
+import React from 'react';
 import { Toaster } from "@/Components/ui/sonner"
 import Sidebar from "@/Components/Sidebar";
 import {BreadCrumb} from "@/Components/BreadCrumb";
@@ -19,14 +19,13 @@ type IProps = {
 export default function Authenticated({ children, breadCrumbs }: IProps) {
 
     return (
-        <div className="min-h-screen font-albert bg-white">
+        <div className="min-h-screen font-albert bg-gray-50">
             <Toaster richColors/>
             <div className="w-full h-[80px] md:pl-64 fixed inset-y-0 bg-white z-50">
                 <div className="w-full p-4 border-b h-full flex items-center bg-white z-50">
                     {breadCrumbs && <BreadCrumb breadCrumbs={breadCrumbs}/>}
                     <MobileSidebar/>
                     <NavbarRoutes/>
-                    {/*<Navbar />*/}
                 </div>
             </div>
             <div className="hidden md:flex h-full w-64 flex-col fixed inset-y-0 z-50">

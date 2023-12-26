@@ -3,7 +3,17 @@ import { Head } from '@inertiajs/react';
 
 export default function Dashboard() {
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout
+            breadCrumbs={
+                [
+                    {
+                        title : "Dasbor",
+                        url: "dashboard",
+                        disabled: true
+                    },
+                ]
+            }
+        >
             <Head title="Dashboard" />
             <div>
                 you're login
