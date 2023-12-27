@@ -39,7 +39,7 @@ const Routes2 = [
     {
         icon: BaggageClaim,
         label: "Jenis akuisisi",
-        href: "/item",
+        href: "/acquisition-methods",
         requiredRoles: ["Admin"],
     },
 ];

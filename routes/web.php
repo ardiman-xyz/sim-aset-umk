@@ -51,6 +51,14 @@ Route::middleware(['auth'])->group(function () {
         Route::delete("{id}", [\App\Http\Controllers\ConditionItemController::class, 'destroy']);
     });
 
+    Route::prefix("acquisition-methods")->group(function () {
+        Route::get("/", [\App\Http\Controllers\AcquisitionMethodsController::class, 'index'])->name("acquisition.index");
+        Route::post("/", [\App\Http\Controllers\AcquisitionMethodsController::class, 'store']);
+        Route::put("{id}", [\App\Http\Controllers\AcquisitionMethodsController::class, 'update']);
+        Route::delete("{id}", [\App\Http\Controllers\AcquisitionMethodsController::class, 'destroy']);
+    });
+
+
 });
 
 Route::middleware('auth')->group(function () {
