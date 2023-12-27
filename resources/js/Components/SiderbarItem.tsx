@@ -1,8 +1,7 @@
-import { ChevronDown, Dot, LucideIcon } from "lucide-react";
+import { ChevronDown, LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Link, usePage } from "@inertiajs/react";
 import { useEffect, useState } from "react";
-import { PageProps } from "@/types";
 import { SharedInertiaData } from "@/types/inertia";
 
 interface SidebarItemProps {
@@ -57,7 +56,7 @@ const SidebarItem = ({
                 className={cn(
                     "flex items-center gap-x-2 text-slate-500 text-sm font-[500] transition-all ease-in-out hover:text-slate-600 hover:bg-slate-300/20 ",
                     isActive &&
-                    "text-orange-700 bg-orange-200/20 hover:bg-orange-200/20 hover:text-orange-700"
+                    "text-orange-700 bg-orange-300/20 hover:bg-orange-300/20 hover:text-orange-700"
                 )}
                 onClick={(e) => {
                     if (children) {

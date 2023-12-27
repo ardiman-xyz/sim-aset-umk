@@ -1,5 +1,6 @@
 import Logo from "./Logo";
 import SidebarRoutes from "./SidebarRoutes";
+
 const Sidebar = () => {
     return (
         <div className="h-full border-r border-gray-100 flex flex-col overflow-y-auto bg-white">

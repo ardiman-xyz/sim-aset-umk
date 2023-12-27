@@ -5,17 +5,6 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -25,14 +14,18 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+
+    Route::prefix("building")->group(function () {
+        Route::get("/", [\App\Http\Controllers\BuildingController::class, 'index'])->name("building.index");
+        Route::post("/", [\App\Http\Controllers\BuildingController::class, 'store'])->name("building.store");
+        Route::put("{id}", [\App\Http\Controllers\BuildingController::class, 'update'])->name("building.edit");
+        Route::delete("{id}", [\App\Http\Controllers\BuildingController::class, 'destroy'])->name("building.destroy");
+    });
+
 });
 
 Route::middleware('auth')->group(function () {

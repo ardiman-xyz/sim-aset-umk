@@ -10,6 +10,8 @@ class Building extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name'];
+
     public function floors(): HasMany
     {
         return $this->hasMany(Floor::class, "building_id", "id");

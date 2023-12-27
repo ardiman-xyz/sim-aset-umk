@@ -21,7 +21,7 @@ const Routes2 = [
     {
         icon: Building2,
         label: "Gedung",
-        href: "/buildings",
+        href: "/building",
         requiredRoles: ["Admin"],
     },
     {

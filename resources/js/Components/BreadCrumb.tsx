@@ -26,9 +26,9 @@ export const BreadCrumb = ({ breadCrumbs }: BreadCrumbProps) => {
                                 {item.title}
                             </Link>
                         ) : (
-                            <li className="text-neutral-500 dark:text-neutral-400">
+                            <span className="text-neutral-500 dark:text-neutral-400">
                                 {item.title}
-                            </li>
+                            </span>
                         )}
                     </li>
                     {index < breadCrumbs.length - 1 && (
