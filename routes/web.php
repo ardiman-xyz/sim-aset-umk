@@ -44,6 +44,13 @@ Route::middleware(['auth'])->group(function () {
         Route::delete("{id}", [\App\Http\Controllers\CategoriesItemController::class, 'destroy']);
     });
 
+    Route::prefix("conditions")->group(function () {
+        Route::get("/", [\App\Http\Controllers\ConditionItemController::class, 'index'])->name("condition.index");
+        Route::post("/", [\App\Http\Controllers\ConditionItemController::class, 'store']);
+        Route::put("{id}", [\App\Http\Controllers\ConditionItemController::class, 'update']);
+        Route::delete("{id}", [\App\Http\Controllers\ConditionItemController::class, 'destroy']);
+    });
+
 });
 
 Route::middleware('auth')->group(function () {

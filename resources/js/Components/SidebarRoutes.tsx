@@ -33,7 +33,7 @@ const Routes2 = [
     {
         icon: ActivitySquare,
         label: "Kondisi",
-        href: "/condition",
+        href: "/conditions",
         requiredRoles: ["Admin"],
     },
     {

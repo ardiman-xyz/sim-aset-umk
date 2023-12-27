@@ -2,28 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\CategoriesService;
+use App\Services\ConditionService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Exception;
 use Inertia\Response as InertiaView;
+use Exception;
 
-class CategoriesItemController extends Controller
+class ConditionItemController extends Controller
 {
-    private CategoriesService $categoriesService;
+    private ConditionService $conditionService;
 
     public function __construct()
     {
-        $this->categoriesService = new CategoriesService();
+        $this->conditionService = new ConditionService();
     }
 
     public function index(): InertiaView
     {
-        $categories = $this->categoriesService->findAll();
+        $data = $this->conditionService->findAll();
 
-        return Inertia::render("Category/Page", [
-            "categories" => $categories
+        return Inertia::render("Condition/Page", [
+            "conditions" => $data
         ]);
     }
 
@@ -36,7 +36,7 @@ class CategoriesItemController extends Controller
         try {
             $name = $request->input("name");
 
-            $response = $this->categoriesService->create($name);
+            $response = $this->conditionService->create($name);
             return response()->json([
                 'status' => true,
                 'message' => 'Successfully updated',
@@ -60,7 +60,7 @@ class CategoriesItemController extends Controller
         try {
             $name = $request->input("name");
 
-            $response = $this->categoriesService->update($name, $id);
+            $response = $this->conditionService->update($name, $id);
             return response()->json([
                 'status' => true,
                 'message' => 'Successfully updated',
@@ -78,7 +78,7 @@ class CategoriesItemController extends Controller
     public function destroy(string $id): JsonResponse
     {
         try {
-          $this->categoriesService->deleteById($id);
+            $this->conditionService->deleteById($id);
             return response()->json([
                 'status' => true,
                 'message' => 'Successfully deleted',
