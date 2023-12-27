@@ -1,6 +1,7 @@
-import {Head} from "@inertiajs/react";
-
 import Authenticated from "@/Layouts/AuthenticatedLayout";
+import {Head} from "@inertiajs/react";
+import {Building} from "@/types/app";
+import CreateForm from "./_components/create-form";
 
 import {
     Card,
@@ -8,48 +9,50 @@ import {
     CardDescription,
     CardHeader,
     CardTitle,
-} from "@/Components/ui/card"
-
+} from "@/Components/ui/card";
 import {
     Table,
-    TableBody,
-    TableCell,
+    TableBody, TableCell,
     TableHead,
     TableHeader,
     TableRow,
 } from "@/Components/ui/table"
-import CreateForm from "./_components/create-form";
-import {TableItem} from "@/Pages/Building/_components/TableItem";
+import {TableItem} from "./_components/table-item";
 import {DataEmpty} from "@/Components/DataEmpty";
 
-const breadCrumb = [
-    {
-        title : "Gedung",
-        url: "building.index",
-        disabled: true
-    },
-];
 
 interface IProps {
-    buildings: {
-        name: string
-        id: number;
-    }[]
+    building: Building
 }
 
-const Page = ({buildings}: IProps) => {
+const Page = ({building}: IProps) => {
+
+    const breadCrumb = [
+        {
+            title : "Gedung",
+            url: "building.index",
+            disabled: false
+        },
+        {
+            title : building.name,
+            url: "",
+            disabled: true
+        },
+    ];
 
     return (
         <Authenticated breadCrumbs={breadCrumb}>
-            <Head title="Gedung" />
+            <Head title={`Lantai ${building.name}`} />
             <Card>
                 <div className="flex justify-between items-center">
                     <CardHeader>
-                        <CardTitle>Gedung</CardTitle>
-                        <CardDescription>List data gedung</CardDescription>
+                        <CardTitle>Lantai</CardTitle>
+                        <CardDescription>Lantai di {building.name}</CardDescription>
                     </CardHeader>
                     <div className="mr-6">
-                        <CreateForm />
+                        <CreateForm
+                            buildingId={building.id}
+                        />
                     </div>
                 </div>
                 <CardContent>
@@ -58,27 +61,26 @@ const Page = ({buildings}: IProps) => {
                             <TableRow>
                                 <TableHead className="w-[100px]">No.</TableHead>
                                 <TableHead>Nama</TableHead>
-                                <TableHead>Jumlah lantai</TableHead>
-                                <TableHead>Jumlah kelas</TableHead>
+                                <TableHead>Jumlah ruangan</TableHead>
                                 <TableHead >Aksi</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
                             {
-                                buildings.length > 0 && (
-                                    buildings.map((building, index) => (
+                                building.floors.length > 0 && (
+                                    building.floors.map((floor, index) => (
                                         <TableItem
-                                            name={building.name}
+                                            name={floor.name}
                                             key={index}
                                             index={index}
-                                            id={building.id}
+                                            id={floor.id}
+                                            buildingId={building.id}
                                         />
                                     ))
                                 )
                             }
-
                             {
-                                buildings.length < 1 && (
+                                building.floors.length < 1 && (
                                     <TableRow >
                                         <TableCell colSpan={5}>
                                             <DataEmpty />
@@ -88,10 +90,8 @@ const Page = ({buildings}: IProps) => {
                             }
                         </TableBody>
                     </Table>
-
                 </CardContent>
             </Card>
-
         </Authenticated>
     )
 }

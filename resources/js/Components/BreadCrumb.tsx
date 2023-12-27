@@ -26,7 +26,7 @@ export const BreadCrumb = ({ breadCrumbs }: BreadCrumbProps) => {
                                 {item.title}
                             </Link>
                         ) : (
-                            <span className="text-neutral-500 dark:text-neutral-400">
+                            <span className="text-neutral-500 dark:text-neutral-400 ">
                                 {item.title}
                             </span>
                         )}

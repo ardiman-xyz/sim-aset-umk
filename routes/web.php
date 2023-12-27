@@ -24,6 +24,13 @@ Route::middleware(['auth'])->group(function () {
         Route::post("/", [\App\Http\Controllers\BuildingController::class, 'store'])->name("building.store");
         Route::put("{id}", [\App\Http\Controllers\BuildingController::class, 'update'])->name("building.edit");
         Route::delete("{id}", [\App\Http\Controllers\BuildingController::class, 'destroy'])->name("building.destroy");
+
+
+        Route::get("{building_id}/floor", [\App\Http\Controllers\FloorController::class, 'index'])->name("floor.index");
+        Route::post("{building_id}/floor", [\App\Http\Controllers\FloorController::class, 'store'])->name("floor.store");
+        Route::put("{building_id}/floor/{id}", [\App\Http\Controllers\FloorController::class, 'update'])->name("floor.update");
+        Route::delete("floor/{id}", [\App\Http\Controllers\FloorController::class, 'destroy'])->name("floor.destroy");
+
     });
 
 });

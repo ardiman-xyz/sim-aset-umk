@@ -11,6 +11,8 @@ class Floor extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'building_id'];
+
     public function building(): BelongsTo
     {
         return $this->belongsTo(Building::class, "building_id");

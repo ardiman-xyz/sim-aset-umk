@@ -19,9 +19,10 @@ interface IProps {
     name: string;
     id: number;
     index: number;
+    buildingId: number;
 }
 
-export const TableItem = ({name, index, id}: IProps) => {
+export const TableItem = ({name, index, id, buildingId}: IProps) => {
 
     const [isModalEditOpen, setIsModalEditOpen] = useState<boolean>(false);
     const [isModalDeleteOpen, setIsModalDeleteOpen] = useState<boolean>(false);
@@ -44,7 +45,7 @@ export const TableItem = ({name, index, id}: IProps) => {
                 <TableCell>5</TableCell>
                 <TableCell>30</TableCell>
                 <TableCell>
-                <DropdownMenu>
+                    <DropdownMenu>
                         <DropdownMenuTrigger>
                             <MoreVertical className="w-4 h-4" />
                         </DropdownMenuTrigger>
@@ -69,8 +70,9 @@ export const TableItem = ({name, index, id}: IProps) => {
                                 id
                             }
                         }
-                      isOpen={isModalEditOpen}
-                      onClose={() => setIsModalEditOpen(false)}
+                        buildingId={buildingId}
+                        isOpen={isModalEditOpen}
+                        onClose={() => setIsModalEditOpen(false)}
                     />
                 )
             }
