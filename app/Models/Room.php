@@ -10,6 +10,8 @@ class Room extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'floor_id'];
+
     public function floor(): BelongsTo
     {
         return $this->belongsTo(Floor::class, "floor_id");

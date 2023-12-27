@@ -1,5 +1,4 @@
 import {TableCell, TableRow} from "@/Components/ui/table";
-import {router} from "@inertiajs/react";
 import {MoreVertical} from "lucide-react";
 
 import {
@@ -12,37 +11,29 @@ import {
 } from "@/Components/ui/dropdown-menu";
 import {useState} from "react";
 import EditForm from "./edit-form";
-import {DeleteConfirm} from "./delete-confirm";
-import {Hint} from "@/Components/HInt";
+import DeleteConfirm from "./delete-confirm";
 
 interface IProps {
     name: string;
     id: number;
     index: number;
-    buildingId: number;
+    floorId: number;
 }
 
-export const TableItem = ({name, index, id, buildingId}: IProps) => {
+export const TableItem = ({name, index, id, floorId}: IProps) => {
 
     const [isModalEditOpen, setIsModalEditOpen] = useState<boolean>(false);
     const [isModalDeleteOpen, setIsModalDeleteOpen] = useState<boolean>(false);
-
-    const handleClick = () => {
-        return router.visit(route("room.index", id))
-    }
 
     return (
         <>
             <TableRow>
                 <TableCell className="font-medium">{index + 1}</TableCell>
                 <TableCell>
-                    <Hint description="Klik untuk detail">
-                        <span className="underline text-blue-700 cursor-pointer hover:text-blue-600 font-semibold" onClick={handleClick}>
-                            {name}
-                        </span>
-                    </Hint>
+                    <span className="font-semibold">
+                        {name}
+                    </span>
                 </TableCell>
-                <TableCell>30</TableCell>
                 <TableCell>
                     <DropdownMenu>
                         <DropdownMenuTrigger>
@@ -69,7 +60,7 @@ export const TableItem = ({name, index, id, buildingId}: IProps) => {
                                 id
                             }
                         }
-                        buildingId={buildingId}
+                        floorId={floorId}
                         isOpen={isModalEditOpen}
                         onClose={() => setIsModalEditOpen(false)}
                     />
