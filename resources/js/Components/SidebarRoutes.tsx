@@ -26,20 +26,20 @@ const Routes2 = [
     },
     {
         icon: Blocks,
-        label: "Jenis",
+        label: "Kategori barang",
         href: "/categories",
         requiredRoles: ["Admin"],
     },
     {
         icon: ActivitySquare,
         label: "Kondisi",
-        href: "/categories",
+        href: "/condition",
         requiredRoles: ["Admin"],
     },
     {
         icon: BaggageClaim,
         label: "Jenis akuisisi",
-        href: "/categories",
+        href: "/item",
         requiredRoles: ["Admin"],
     },
 ];

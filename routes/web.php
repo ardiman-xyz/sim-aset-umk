@@ -35,8 +35,13 @@ Route::middleware(['auth'])->group(function () {
         Route::post("{floor_id}/room", [\App\Http\Controllers\RoomController::class, 'store'])->name("room.store");
         Route::put("{floor_id}/room/{id}", [\App\Http\Controllers\RoomController::class, 'update'])->name("room.update");
         Route::delete("room/{id}", [\App\Http\Controllers\RoomController::class, 'destroy'])->name("room.destroy");
+    });
 
-
+    Route::prefix("categories")->group(function () {
+        Route::get("/", [\App\Http\Controllers\CategoriesItemController::class, 'index'])->name("category.index");
+        Route::post("/", [\App\Http\Controllers\CategoriesItemController::class, 'store']);
+        Route::put("{id}", [\App\Http\Controllers\CategoriesItemController::class, 'update']);
+        Route::delete("{id}", [\App\Http\Controllers\CategoriesItemController::class, 'destroy']);
     });
 
 });
