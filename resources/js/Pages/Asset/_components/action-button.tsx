@@ -9,11 +9,6 @@ const ActionButton = () => {
 
     return (
         <div className="flex items-center gap-x-3">
-            <Hint description="Lihat Qrcode" side="top" sideOffset={3}>
-                <Button className="" variant="outline">
-                    <QrCode />
-                </Button>
-            </Hint>
             <Hint description="Cetak" side="top" sideOffset={3}>
                 <Button className="mr-3" variant="outline">
                     <Printer />

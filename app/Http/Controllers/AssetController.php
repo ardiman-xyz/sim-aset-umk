@@ -6,6 +6,7 @@ use App\Dto\CreateAssetDTO;
 use App\Http\Requests\CreateAssetRequest;
 use App\Models\AcquisitionMethod;
 use App\Models\Asset;
+use App\Models\Building;
 use App\Models\Category;
 use App\Models\Condition;
 use App\Services\AssetService;
@@ -85,9 +86,15 @@ class AssetController extends Controller
         $conditions = Condition::all("id", "name");
         $acquisitionMethods = AcquisitionMethod::all("id", "name");
         $categories = Category::all("id", "name");
+        $buildings = Building::all("id", "name");
+
+        $buildings = $buildings->map(function ($building) {
+            return ['value' => $building->id, 'label' => $building->name];
+        });
 
         $asset = Asset::findOrFail($id)->load('gallery', 'categories', 'condition', 'acquisitionMethod');
-        return Inertia::render('Asset/Show', compact("asset", "conditions", "acquisitionMethods", "categories"));
+
+        return Inertia::render('Asset/Show', compact("asset", "conditions", "acquisitionMethods", "categories", "buildings"));
     }
 
     public function update(Request $request, string $id) 

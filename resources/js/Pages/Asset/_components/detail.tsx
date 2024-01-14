@@ -82,7 +82,7 @@ const DetailItem = ({
                             id={asset.id}
                             datas={acquisitionMethods}
                             name="acquisition_method_id"
-                            title="Jenis Akuisi"
+                            title="Jenis Akuisisi"
                             value={asset.acquisition_method}
                         />
 
