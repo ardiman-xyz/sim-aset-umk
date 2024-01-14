@@ -77,7 +77,7 @@ const EditForm = ({defaultData, isOpen, onClose, floorId}: IProps) => {
                 <div className="p-4">
                     <div className="w-full flex items-center justify-center">
                         <h2 className="text-md text-center font-bold">
-                            Tambah gedung
+                            Edit ruangan
                         </h2>
                     </div>
                     <div className="mt-4">

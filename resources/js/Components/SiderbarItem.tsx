@@ -13,12 +13,12 @@ interface SidebarItemProps {
 }
 
 const SidebarItem = ({
-                         icon: Icon,
-                         label,
-                         href,
-                         children,
-                         requiredRoles,
-                     }: SidebarItemProps) => {
+    icon: Icon,
+    label,
+    href,
+    children,
+    requiredRoles,
+}: SidebarItemProps) => {
     const { auth } = usePage<SharedInertiaData>().props;
 
     const page = usePage();
@@ -56,7 +56,7 @@ const SidebarItem = ({
                 className={cn(
                     "flex items-center gap-x-2 text-slate-500 text-sm font-[500] transition-all ease-in-out hover:text-slate-600 hover:bg-slate-300/20 ",
                     isActive &&
-                    "text-orange-700 bg-orange-300/20 hover:bg-orange-300/20 hover:text-orange-700"
+                        "text-orange-700 bg-orange-300/20 hover:bg-orange-300/20 hover:text-orange-700"
                 )}
                 onClick={(e) => {
                     if (children) {
@@ -82,7 +82,7 @@ const SidebarItem = ({
                     {label}
                 </div>
 
-                {children && <ChevronDown className="h-5 w-5 mr-3"/>}
+                {children && <ChevronDown className="h-5 w-5 mr-3" />}
             </Link>
 
             <div className="pl-5">

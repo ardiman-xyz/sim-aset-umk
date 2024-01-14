@@ -15,7 +15,7 @@ import {
     FormMessage,
 } from "@/Components/ui/form";
 import { Alert, AlertDescription, AlertTitle } from "@/Components/ui/alert";
-import {AlertCircle, PlusCircle, RotateCw} from "lucide-react";
+import { AlertCircle, PlusCircle, RotateCw } from "lucide-react";
 import { toast } from "sonner";
 import { router } from "@inertiajs/react";
 
@@ -25,7 +25,7 @@ const formSchema = z.object({
     }),
 });
 
-const CreateForm = ({buildingId}: {buildingId: number}) => {
+const CreateForm = ({ buildingId }: { buildingId: number }) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isOpenModalAdd, setIsOpenModalAdd] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
@@ -67,7 +67,8 @@ const CreateForm = ({buildingId}: {buildingId: number}) => {
         <div>
             <Button onClick={toggleModalAdd}>
                 <PlusCircle className="w-4 h-4 mr-2" />
-                Tambah</Button>
+                Tambah
+            </Button>
             <Modal
                 onClose={toggleModalAdd}
                 show={isOpenModalAdd}

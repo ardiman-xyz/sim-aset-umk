@@ -58,7 +58,12 @@ Route::middleware(['auth'])->group(function () {
         Route::delete("{id}", [\App\Http\Controllers\AcquisitionMethodsController::class, 'destroy']);
     });
 
-
+    Route::prefix("assets")->group(function () {
+        Route::get("/", [\App\Http\Controllers\AssetController::class, 'index'])->name("asset.index");
+        Route::get("create", [\App\Http\Controllers\AssetController::class, 'create'])->name("asset.create");
+        Route::get("{id}", [\App\Http\Controllers\AssetController::class, 'show'])->name("asset.show");
+        Route::post("/", [\App\Http\Controllers\AssetController::class, 'store'])->name("asset.store");
+    });
 });
 
 Route::middleware('auth')->group(function () {

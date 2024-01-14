@@ -49,13 +49,7 @@ const Routes3 = [
     {
         icon: Server,
         label: "Aset",
-        href: "/placements",
-        requiredRoles: ["Admin"],
-    },
-    {
-        icon: Cctv,
-        label: "Penempatan",
-        href: "/placements",
+        href: "/assets",
         requiredRoles: ["Admin"],
     },
     {
