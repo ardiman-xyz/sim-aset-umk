@@ -81,8 +81,59 @@ class AssetController extends Controller
 
     public function show(string $id): ViewInertia
     {
-        $asset = Asset::findOrFail($id)->load('gallery', 'categories', 'condition');
-        return Inertia::render('Asset/Show', ['asset' => $asset]);
+        $asset = Asset::findOrFail($id)->load('gallery', 'categories', 'condition', 'acquisitionMethod');
+        return Inertia::render('Asset/Show', compact("asset"));
+    }
+
+    public function update(Request $request, string $id) 
+    {
+        $validatedData = $request->validate([
+            'value' => 'required', 
+            'item' => 'required|string|max:255', 
+        ]);
+
+        $value = $validatedData['value'];
+        $item = $validatedData['item'];
+
+        $asset = Asset::findOrFail($id);
+        $asset->$item = $value;
+
+        if($item === "quantity")
+        {
+            $total = ((int)$asset->$item * $asset->purchase_price);
+            $asset->total_price = $total;
+        }
+
+        if($item === "purchase_price")
+        {
+            $total = ((int)$asset->$item * $asset->quantity);
+            $asset->total_price = $total;
+        }
+        
+
+        try {
+            if($asset->save())
+            {
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Successfully updated',
+                    'data' => $asset
+                ], 201);
+            }else{
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Gagal mengupdate',
+                    'data' => []
+                ], 400);
+            }
+        }catch (Exception $exception)
+        {
+            return response()->json([
+                'success'    => false,
+                'message'   => "Something went wrong!"
+            ], 400);
+        }
+
     }
 
 }

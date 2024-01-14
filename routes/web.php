@@ -63,6 +63,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get("create", [\App\Http\Controllers\AssetController::class, 'create'])->name("asset.create");
         Route::get("{id}", [\App\Http\Controllers\AssetController::class, 'show'])->name("asset.show");
         Route::post("/", [\App\Http\Controllers\AssetController::class, 'store'])->name("asset.store");
+        Route::put("item/{id}", [\App\Http\Controllers\AssetController::class, 'update'])->name("asset.update");
     });
 });
 
