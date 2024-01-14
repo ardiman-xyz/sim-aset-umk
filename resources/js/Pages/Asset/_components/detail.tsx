@@ -5,17 +5,25 @@ import {
     CardHeader,
     CardTitle,
 } from "@/Components/ui/card";
-import { Asset } from "@/types/app";
-import React from "react";
+import { AcquisitionMethod, Asset, Category, Condition } from "@/types/app";
 import Item from "./item";
-import Categories from "./categories";
 import { formatDate } from "@/Helpers/date";
+import ItemSelect from "./item-select";
+import Categories from "./categories";
 
 interface DetailItemProps {
     asset: Asset;
+    conditions: Condition[];
+    acquisitionMethods: AcquisitionMethod[];
+    categories: Category[];
 }
 
-const DetailItem = ({ asset }: DetailItemProps) => {
+const DetailItem = ({
+    asset,
+    conditions,
+    acquisitionMethods,
+    categories,
+}: DetailItemProps) => {
     return (
         <Card>
             <CardHeader>
@@ -62,21 +70,27 @@ const DetailItem = ({ asset }: DetailItemProps) => {
                             isDate
                             type="date"
                         />
-                        <Item
+                        <ItemSelect
                             id={asset.id}
-                            name=""
+                            datas={conditions}
+                            name="condition_id"
                             title="Kondisi"
-                            value={asset.condition.name}
+                            value={asset.condition}
                         />
-                        <Item
+
+                        <ItemSelect
                             id={asset.id}
-                            name=""
-                            title="Jenis Akuisisi"
-                            value={asset.acquisition_method.name}
+                            datas={acquisitionMethods}
+                            name="acquisition_method_id"
+                            title="Jenis Akuisi"
+                            value={asset.acquisition_method}
                         />
+
                         <Categories
+                            id={asset.id}
+                            categories={categories}
+                            data={asset.categories[0]}
                             title="Kategori"
-                            categories={asset.categories}
                         />
                     </div>
                 </div>

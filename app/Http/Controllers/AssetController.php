@@ -29,7 +29,7 @@ class AssetController extends Controller
     {
         $assets = Asset::with(['gallery' => function ($query) {
             $query->first();
-        }, 'categories', 'condition'])->get();
+        }, 'categories', 'condition'])->orderBy("id", "desc")->get();
 
         $assets = $assets->map(function ($asset) {
             $asset->image = $asset->gallery->first() ? $asset->gallery->first()->file : null;
@@ -81,8 +81,12 @@ class AssetController extends Controller
 
     public function show(string $id): ViewInertia
     {
+        $conditions = Condition::all("id", "name");
+        $acquisitionMethods = AcquisitionMethod::all("id", "name");
+        $categories = Category::all("id", "name");
+
         $asset = Asset::findOrFail($id)->load('gallery', 'categories', 'condition', 'acquisitionMethod');
-        return Inertia::render('Asset/Show', compact("asset"));
+        return Inertia::render('Asset/Show', compact("asset", "conditions", "acquisitionMethods", "categories"));
     }
 
     public function update(Request $request, string $id) 
@@ -118,7 +122,7 @@ class AssetController extends Controller
                     'status' => true,
                     'message' => 'Successfully updated',
                     'data' => $asset
-                ], 201);
+                ], 200);
             }else{
                 return response()->json([
                     'status' => false,
@@ -133,6 +137,25 @@ class AssetController extends Controller
                 'message'   => "Something went wrong!"
             ], 400);
         }
+
+    }
+
+    public function updateCategory(Request $request, string $id)
+    {
+        $validatedData = $request->validate([
+            'value' => 'required', 
+        ]);
+
+        $value = $validatedData['value'];
+
+        $asset = Asset::findOrFail($id);
+        $asset->categories()->sync($value);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Successfully updated',
+            'data' => $asset
+        ], 200);
 
     }
 

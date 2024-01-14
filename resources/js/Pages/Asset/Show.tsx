@@ -1,5 +1,5 @@
 import Authenticated from "@/Layouts/AuthenticatedLayout";
-import { Asset } from "@/types/app";
+import { AcquisitionMethod, Asset, Category, Condition } from "@/types/app";
 import { SharedInertiaData } from "@/types/inertia";
 import { Head, usePage } from "@inertiajs/react";
 import ImagesDetail from "./_components/images-detail";
@@ -7,11 +7,17 @@ import DetailItem from "./_components/detail";
 
 interface ShowPageProps {
     asset: Asset;
+    conditions: Condition[];
+    acquisitionMethods: AcquisitionMethod[];
+    categories: Category[];
 }
 
-const ShowPage = ({ asset }: ShowPageProps) => {
-    console.info(asset);
-
+const ShowPage = ({
+    asset,
+    conditions,
+    acquisitionMethods,
+    categories,
+}: ShowPageProps) => {
     return (
         <Authenticated>
             <Head title="Detail" />
@@ -24,7 +30,12 @@ const ShowPage = ({ asset }: ShowPageProps) => {
                     </h1>
                 </div>
                 <div className="w-2/3">
-                    <DetailItem asset={asset} />
+                    <DetailItem
+                        acquisitionMethods={acquisitionMethods}
+                        conditions={conditions}
+                        asset={asset}
+                        categories={categories}
+                    />
                 </div>
             </div>
         </Authenticated>
