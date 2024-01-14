@@ -1,30 +1,35 @@
-import {TableCell, TableRow} from "@/Components/ui/table";
-import {Hint} from "@/Components/HInt";
+import { useAssetStore } from "@/Context/useDetailAsetStore";
+
+import { TableCell, TableRow } from "@/Components/ui/table";
+import { Hint } from "@/Components/HInt";
 import {
     DropdownMenu,
-    DropdownMenuContent, DropdownMenuItem,
+    DropdownMenuContent,
+    DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,
-    DropdownMenuTrigger
+    DropdownMenuTrigger,
 } from "@/Components/ui/dropdown-menu";
-import {MoreVertical} from "lucide-react";
-import {Asset} from "@/types/app";
-import {useState} from "react";
-import {router} from "@inertiajs/react";
+import { MoreVertical } from "lucide-react";
+import { Asset } from "@/types/app";
+import { useState } from "react";
+import { router } from "@inertiajs/react";
 
 interface IProps {
     asset: Asset;
     index: number;
 }
 
-const TableItem = ({asset, index}: IProps) => {
-
+const TableItem = ({ asset, index }: IProps) => {
     const [isModalEditOpen, setIsModalEditOpen] = useState<boolean>(false);
     const [isModalDeleteOpen, setIsModalDeleteOpen] = useState<boolean>(false);
 
+    const { setAsset } = useAssetStore();
+
     const handleClickDetail = () => {
-        return router.visit(route("asset.show", asset.id))
-    }
+        setAsset(asset);
+        return router.visit(route("asset.show", asset.id));
+    };
 
     return (
         <>
@@ -32,7 +37,10 @@ const TableItem = ({asset, index}: IProps) => {
                 <TableCell className="font-medium">{index + 1}</TableCell>
                 <TableCell>
                     <Hint description="Klik untuk detail">
-                        <span className="underline text-blue-700 cursor-pointer hover:text-blue-600 font-semibold" onClick={handleClickDetail}>
+                        <span
+                            className="underline text-blue-700 cursor-pointer hover:text-blue-600 font-semibold"
+                            onClick={handleClickDetail}
+                        >
                             {asset.name}
                         </span>
                     </Hint>
@@ -47,8 +55,16 @@ const TableItem = ({asset, index}: IProps) => {
                         <DropdownMenuContent>
                             <DropdownMenuLabel>Aksi</DropdownMenuLabel>
                             <DropdownMenuSeparator />
-                            <DropdownMenuItem className="cursor-pointer" onClick={() => setIsModalEditOpen(true)}>Edit</DropdownMenuItem>
-                            <DropdownMenuItem className="cursor-pointer" onClick={() => setIsModalDeleteOpen(true)}>
+                            <DropdownMenuItem
+                                className="cursor-pointer"
+                                onClick={() => setIsModalEditOpen(true)}
+                            >
+                                Edit
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                                className="cursor-pointer"
+                                onClick={() => setIsModalDeleteOpen(true)}
+                            >
                                 Delete
                             </DropdownMenuItem>
                         </DropdownMenuContent>
@@ -81,7 +97,7 @@ const TableItem = ({asset, index}: IProps) => {
             {/*    )*/}
             {/*}*/}
         </>
-    )
-}
+    );
+};
 
 export default TableItem;

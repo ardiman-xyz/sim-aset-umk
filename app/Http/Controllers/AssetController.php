@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response as ViewInertia;
 use Exception;
+use Illuminate\Support\Facades\Storage;
 
 class AssetController extends Controller
 {
@@ -158,5 +159,30 @@ class AssetController extends Controller
         ], 200);
 
     }
+
+    public function destroy(string $id)
+    {
+        $asset = Asset::findOrFail($id);
+        
+        $asset->categories()->detach();
+
+        $asset->gallery()->delete();
+
+        
+        foreach ($asset->gallery as $image) {
+            Storage::delete("public/".$image->file);
+    
+            $image->delete();
+        }
+   
+        $asset->delete();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Successfully deleted',
+            'data' => []
+        ], 200);
+    }
+
 
 }

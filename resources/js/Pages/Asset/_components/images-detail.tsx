@@ -11,7 +11,7 @@ const ImagesDetail = ({ images }: ImagesProps) => {
     const { ziggy } = usePage<SharedInertiaData>().props;
 
     return (
-        <ul className="w-full flex flex-col space-y-2 bg-white ro p-2 rounded shadow max-h-[390px] overflow-y-auto min-h-[390px]">
+        <ul className="w-full flex flex-col space-y-2 bg-white ro p-2 rounded shadow max-h-[410px] overflow-y-auto min-h-[410px]">
             {images.map((item, index) => (
                 <li key={index} className="w-full ">
                     <img

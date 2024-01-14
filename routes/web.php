@@ -65,6 +65,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post("/", [\App\Http\Controllers\AssetController::class, 'store'])->name("asset.store");
         Route::put("item/{id}", [\App\Http\Controllers\AssetController::class, 'update'])->name("asset.update");
         Route::put("categories/{id}", [\App\Http\Controllers\AssetController::class, 'updateCategory']);
+        Route::delete("{id}", [\App\Http\Controllers\AssetController::class, 'destroy'])->name("asset.delete");
     });
 });
 
