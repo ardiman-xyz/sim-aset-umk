@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Dto\CreateAssetDTO;
+use App\Dto\CreatePlacementDTO;
 use App\Http\Requests\CreateAssetRequest;
+use App\Http\Requests\StorePlacementRequest;
 use App\Models\AcquisitionMethod;
 use App\Models\Asset;
 use App\Models\Building;
 use App\Models\Category;
 use App\Models\Condition;
 use App\Services\AssetService;
+use App\Services\PlacementService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -21,10 +24,12 @@ class AssetController extends Controller
 {
 
     private AssetService $assetService;
+    private PlacementService $placementService;
 
     public function __construct()
     {
         $this->assetService = new AssetService();
+        $this->placementService = new PlacementService();
     }
 
     public function index(): ViewInertia
@@ -189,6 +194,68 @@ class AssetController extends Controller
             'message' => 'Successfully deleted',
             'data' => []
         ], 200);
+    }
+
+    public function floors(string $building_id)
+    {
+        try {
+            $response = $this->assetService->getFloors($building_id);
+            return response()->json([
+                'status' => true,
+                'data' => $response
+            ], 200);
+        }catch (Exception $exception)
+        {
+            return response()->json([
+                'success'    => false,
+                'message'   => $exception->getMessage()
+            ], 400);
+        }
+    }
+
+    public function rooms(string $floor_id)
+    {
+        try {
+            $response = $this->assetService->getRooms($floor_id);
+            return response()->json([
+                'status' => true,
+                'data' => $response
+            ], 200);
+        }catch (Exception $exception)
+        {
+            return response()->json([
+                'success'    => false,
+                'message'   => $exception->getMessage()
+            ], 400);
+        }
+    }
+
+    public function createPlacement(StorePlacementRequest $request, string $asset_id)
+    {
+        $data = $request->validationData();
+
+        $dto = new CreatePlacementDTO();
+        $dto->assetId = $asset_id;
+        $dto->buildingId = $data['buildingId'];
+        $dto->floorId = $data['floorId'];
+        $dto->roomId = $data['roomId'];
+        $dto->placementDate = $data['datePlacement'];
+
+
+        try {
+            $response = $this->placementService->create($dto);
+            return response()->json([
+                'status' => true,
+                'data' => $response,
+                'message' => "Aset berhasil ditempatkan!"
+            ], 200);
+        }catch (Exception $exception)
+        {
+            return response()->json([
+                'success'    => false,
+                'message'   => $exception->getMessage()
+            ], 400);
+        }
     }
 
 

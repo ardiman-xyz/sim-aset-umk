@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Dto\CreateAssetDTO;
 use App\Models\Asset;
+use App\Models\Building;
+use App\Models\Floor;
 use App\Models\Gallery;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -55,4 +57,39 @@ class AssetService
             throw new $exception;
         }
     }
+
+    public function getFloors(string $buildingId)
+    {
+        $building = Building::find($buildingId);
+
+        if(!$building) throw new Exception("Data gedung tidak ditemukan");
+
+        return $building->floors()->select('id', 'name')
+                ->get()  
+                ->map(function ($floor) {
+                    return [
+                        'value' => $floor->id,
+                        'label' => $floor->name
+                    ];
+                });
+
+    }
+
+    public function getRooms(string $floorId)
+    {
+        $building = Floor::find($floorId);
+
+        if(!$building) throw new Exception("Data lantai tidak ditemukan");
+
+        return $building->rooms()->select('id', 'name')
+                ->get()  
+                ->map(function ($floor) {
+                    return [
+                        'value' => $floor->id,
+                        'label' => $floor->name
+                    ];
+                });
+
+    }
+
 }

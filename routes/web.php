@@ -66,6 +66,10 @@ Route::middleware(['auth'])->group(function () {
         Route::put("item/{id}", [\App\Http\Controllers\AssetController::class, 'update'])->name("asset.update");
         Route::put("categories/{id}", [\App\Http\Controllers\AssetController::class, 'updateCategory']);
         Route::delete("{id}", [\App\Http\Controllers\AssetController::class, 'destroy'])->name("asset.delete");
+
+        Route::get("{building_id}/floors", [\App\Http\Controllers\AssetController::class, 'floors']);
+        Route::get("{building_id}/rooms", [\App\Http\Controllers\AssetController::class, 'rooms']);
+        Route::post("placement/{asset_id}", [\App\Http\Controllers\AssetController::class, 'createPlacement']);
     });
 });
 
