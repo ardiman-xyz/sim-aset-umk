@@ -188,6 +188,7 @@ class AssetController extends Controller
         $asset->categories()->detach();
 
         $asset->gallery()->delete();
+        $asset->placements()->delete();
 
         
         foreach ($asset->gallery as $image) {

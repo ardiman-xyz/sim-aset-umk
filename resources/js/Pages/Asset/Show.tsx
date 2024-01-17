@@ -52,7 +52,7 @@ const ShowPage = ({
                         categories={categories}
                     />
 
-                    <Placement datas={asset.placements} />
+                    <Placement datas={asset.placements} asset={asset} />
                 </div>
             </div>
         </Authenticated>

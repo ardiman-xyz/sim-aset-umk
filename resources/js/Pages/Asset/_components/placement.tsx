@@ -17,15 +17,20 @@ import {
 } from "@/Components/ui/table";
 import { ChevronRight, QrCode, XIcon } from "lucide-react";
 import CreateForm from "./placement/create-form";
-import { Placement } from "@/types/app";
+import { Asset, Placement } from "@/types/app";
 import { DataEmpty } from "@/Components/DataEmpty";
 import TableItem from "./placement/table-item";
+import { Badge } from "@/Components/ui/badge";
 
 interface PlacementProps {
     datas: Placement[];
+    asset: Asset;
 }
 
-const PlacementPage = ({ datas }: PlacementProps) => {
+const PlacementPage = ({ datas, asset }: PlacementProps) => {
+    const assetTotal = asset.quantity;
+    const placementTotal = datas.length;
+
     return (
         <Card className="mb-10">
             <CardHeader>
@@ -37,11 +42,31 @@ const PlacementPage = ({ datas }: PlacementProps) => {
                         </CardDescription>
                     </div>
                     <div>
-                        <CreateForm />
+                        {assetTotal === placementTotal ? (
+                            <p className="text-sm text-muted-foreground">
+                                Semua aset sudah ditempatkan
+                            </p>
+                        ) : (
+                            <CreateForm />
+                        )}
                     </div>
                 </div>
             </CardHeader>
             <CardContent>
+                <div className="mb-6">
+                    <div className="flex gap-x-3">
+                        <p>
+                            Jumlah aset : <Badge>{assetTotal}</Badge>
+                        </p>
+                        <p>
+                            Ditempatkan :{" "}
+                            <Badge className="bg-green-700">
+                                {placementTotal}
+                            </Badge>
+                        </p>
+                    </div>
+                </div>
+
                 <Table className="border">
                     <TableHeader>
                         <TableRow>
