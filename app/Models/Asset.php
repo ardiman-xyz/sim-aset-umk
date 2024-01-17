@@ -47,4 +47,9 @@ class Asset extends Model
     {
         return $this->belongsTo(Condition::class);
     }
+
+    public function placements()
+    {
+      return $this->hasMany(Placement::class);
+    }
 }

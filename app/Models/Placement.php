@@ -10,6 +10,30 @@ class Placement extends Model
     use HasFactory;
 
     protected $guarded = [];
+    public $keyType = "string";
+    public $primaryKey = "id";
+    public $incrementing = false;
+
+
+    public function asset()
+    {
+       return $this->belongsTo(Asset::class);
+    }
+  
+    public function building()
+    {
+      return $this->belongsTo(Building::class);
+    }
+  
+    public function floor()
+    {
+      return $this->belongsTo(Floor::class);
+    }
+  
+    public function room() 
+    {
+      return $this->belongsTo(Room::class);
+    }
 
     public static function boot()
     {

@@ -36,6 +36,7 @@ export type Asset = {
     condition: Condition;
     gallery: Gallery[];
     acquisition_method: AcquisitionMethod;
+    placements: Placement[];
 };
 
 export type Category = {
@@ -56,4 +57,29 @@ export type Gallery = {
 export type AcquisitionMethod = {
     id: number;
     name: string;
+};
+
+export type Placement = {
+    id: string;
+    asset_id: string;
+    building: {
+        id: number;
+        name: string;
+    };
+    building_id: number;
+    code: string;
+    description: string | null;
+    floor: {
+        id: number;
+        building_id: number;
+        name: string;
+    };
+    floor_id: number | null;
+    placement_date: string;
+    room: {
+        id: number;
+        floor_id: number;
+        name: string;
+    };
+    room_id: number | null;
 };

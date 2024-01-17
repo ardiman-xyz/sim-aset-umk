@@ -1,11 +1,5 @@
 import Authenticated from "@/Layouts/AuthenticatedLayout";
-import {
-    AcquisitionMethod,
-    Asset,
-    Building,
-    Category,
-    Condition,
-} from "@/types/app";
+import { AcquisitionMethod, Asset, Category, Condition } from "@/types/app";
 import { Head } from "@inertiajs/react";
 import ImagesDetail from "./_components/images-detail";
 import DetailItem from "./_components/detail";
@@ -58,7 +52,7 @@ const ShowPage = ({
                         categories={categories}
                     />
 
-                    <Placement />
+                    <Placement datas={asset.placements} />
                 </div>
             </div>
         </Authenticated>

@@ -38,7 +38,14 @@ Class PlacementService {
         ]);
 
         return $placement;
+    }
 
+    public function deleteById(string $id): void
+    {
+        $placement = Placement::find($id);
+        if(!$placement) throw new Exception("Penempatan tidak ditemukan");
+
+        $placement->delete();
     }
 
 }

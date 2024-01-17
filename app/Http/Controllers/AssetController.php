@@ -97,7 +97,16 @@ class AssetController extends Controller
             return ['value' => $building->id, 'label' => $building->name];
         });
 
-        $asset = Asset::findOrFail($id)->load('gallery', 'categories', 'condition', 'acquisitionMethod');
+        $asset = Asset::with([
+            'gallery', 
+            'categories',
+            'condition',
+            'acquisitionMethod',
+            'placements.building',
+            'placements.floor',  
+            'placements.room',
+         ])
+         ->findOrFail($id);
 
         return Inertia::render('Asset/Show', compact("asset", "conditions", "acquisitionMethods", "categories", "buildings"));
     }
@@ -248,6 +257,24 @@ class AssetController extends Controller
                 'status' => true,
                 'data' => $response,
                 'message' => "Aset berhasil ditempatkan!"
+            ], 200);
+        }catch (Exception $exception)
+        {
+            return response()->json([
+                'success'    => false,
+                'message'   => $exception->getMessage()
+            ], 400);
+        }
+    }
+
+    public function deletePlacement(string $id)
+    {
+        try {
+            $response = $this->placementService->deleteById($id);
+            return response()->json([
+                'status' => true,
+                'data' => $response,
+                'message' => "Penempatan berhasil dibatalkan!"
             ], 200);
         }catch (Exception $exception)
         {

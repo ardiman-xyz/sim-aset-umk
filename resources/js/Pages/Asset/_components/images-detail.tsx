@@ -13,7 +13,7 @@ const ImagesDetail = ({ images }: ImagesProps) => {
     return (
         <ul className="w-full flex flex-col space-y-2 bg-white ro p-2 rounded shadow max-h-[410px] overflow-y-auto min-h-[410px]">
             {images.map((item, index) => (
-                <li key={index} className="w-full ">
+                <li key={index} className="w-max ">
                     <img
                         src={ziggy?.url + "/storage/" + item.file}
                         alt="gambar"

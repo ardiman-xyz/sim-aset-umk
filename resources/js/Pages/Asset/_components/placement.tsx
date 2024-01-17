@@ -15,10 +15,17 @@ import {
     TableHeader,
     TableRow,
 } from "@/Components/ui/table";
-import { ChevronRight, QrCode } from "lucide-react";
+import { ChevronRight, QrCode, XIcon } from "lucide-react";
 import CreateForm from "./placement/create-form";
+import { Placement } from "@/types/app";
+import { DataEmpty } from "@/Components/DataEmpty";
+import TableItem from "./placement/table-item";
 
-const Placement = () => {
+interface PlacementProps {
+    datas: Placement[];
+}
+
+const PlacementPage = ({ datas }: PlacementProps) => {
     return (
         <Card className="mb-10">
             <CardHeader>
@@ -47,30 +54,22 @@ const Placement = () => {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        <TableRow>
-                            <TableCell className="font-medium">1</TableCell>
-                            <TableCell>
-                                <div className="flex flex-row gap-x-1 items-center">
-                                    <p> Gedung E</p>
-                                    <ChevronRight className="h-4 w-4" />
-                                    <p>Lantai 1</p>
-                                    <ChevronRight className="h-4 w-4" />
-                                    <p>Ruangan E102</p>
-                                </div>
-                            </TableCell>
-                            <TableCell className="flex items-center justify-center">
-                                <Hint
-                                    description="Klik untuk melihat qrcode"
-                                    side="top"
-                                    sideOffset={2}
-                                >
-                                    <Button variant="outline">
-                                        <QrCode />
-                                    </Button>
-                                </Hint>
-                            </TableCell>
-                            <TableCell>Aksi</TableCell>
-                        </TableRow>
+                        {datas.length < 1 && (
+                            <TableRow>
+                                <TableCell colSpan={4}>
+                                    <DataEmpty message="Belum ada penempatan" />
+                                </TableCell>
+                            </TableRow>
+                        )}
+
+                        {datas.length > 0 &&
+                            datas.map((placement, index) => (
+                                <TableItem
+                                    placement={placement}
+                                    key={index}
+                                    index={index}
+                                />
+                            ))}
                     </TableBody>
                 </Table>
             </CardContent>
@@ -78,4 +77,4 @@ const Placement = () => {
     );
 };
 
-export default Placement;
+export default PlacementPage;

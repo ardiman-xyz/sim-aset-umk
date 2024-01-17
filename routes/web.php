@@ -69,7 +69,11 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get("{building_id}/floors", [\App\Http\Controllers\AssetController::class, 'floors']);
         Route::get("{building_id}/rooms", [\App\Http\Controllers\AssetController::class, 'rooms']);
-        Route::post("placement/{asset_id}", [\App\Http\Controllers\AssetController::class, 'createPlacement']);
+
+        Route::prefix("placement")->group(function () {
+            Route::post("{asset_id}", [\App\Http\Controllers\AssetController::class, 'createPlacement']);
+            Route::delete("{id}", [\App\Http\Controllers\AssetController::class, 'deletePlacement']);
+        });
     });
 });
 
