@@ -46,30 +46,6 @@ const TableItem = ({ asset, index }: IProps) => {
                     </Hint>
                 </TableCell>
                 <TableCell>{asset.quantity}</TableCell>
-                <TableCell>3 Barang</TableCell>
-                <TableCell>
-                    <DropdownMenu>
-                        <DropdownMenuTrigger>
-                            <MoreVertical className="w-4 h-4" />
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent>
-                            <DropdownMenuLabel>Aksi</DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem
-                                className="cursor-pointer"
-                                onClick={() => setIsModalEditOpen(true)}
-                            >
-                                Edit
-                            </DropdownMenuItem>
-                            <DropdownMenuItem
-                                className="cursor-pointer"
-                                onClick={() => setIsModalDeleteOpen(true)}
-                            >
-                                Delete
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
-                </TableCell>
             </TableRow>
 
             {/*{*/}

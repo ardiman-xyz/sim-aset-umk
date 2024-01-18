@@ -59,9 +59,7 @@ const AssetPage = ({ assets }: IProps) => {
                             <TableRow>
                                 <TableHead className="w-[100px]">No.</TableHead>
                                 <TableHead>Nama Barang</TableHead>
-                                <TableHead>J. Barang</TableHead>
-                                <TableHead>Ditempatkan</TableHead>
-                                <TableHead>Aksi</TableHead>
+                                <TableHead>Jumlah Barang</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
