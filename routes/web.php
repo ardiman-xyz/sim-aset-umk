@@ -75,6 +75,12 @@ Route::middleware(['auth'])->group(function () {
             Route::delete("{id}", [\App\Http\Controllers\AssetController::class, 'deletePlacement']);
         });
     });
+
+    Route::prefix("reports")->group(function () {
+        Route::get("/", [\App\Http\Controllers\ReportController::class, 'index'])->name("report.index");
+        Route::get("filter", [\App\Http\Controllers\ReportController::class, 'filter'])->name("report.filter");
+    });
+
 });
 
 Route::middleware('auth')->group(function () {

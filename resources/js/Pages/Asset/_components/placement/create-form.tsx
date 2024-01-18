@@ -1,16 +1,15 @@
 import Select from "react-select";
 import { PlusCircle, RotateCw } from "lucide-react";
-import React, { useState } from "react";
+import { useState } from "react";
+import { toast } from "sonner";
+import { router } from "@inertiajs/react";
+import axios from "axios";
 
 import Modal from "@/Components/Modal";
 import { Button } from "@/Components/ui/button";
 import { usePlacementStore } from "@/Context/usePlacement";
-import { Floor } from "@/types/app";
-import axios from "axios";
 import { Input } from "@/Components/ui/input";
 import { useAssetStore } from "@/Context/useDetailAsetStore";
-import { toast } from "sonner";
-import { router } from "@inertiajs/react";
 
 interface OptionValue {
     value: number;
