@@ -44,6 +44,7 @@ const IndexReportPage = ({ buildings }: IProps) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const [assets, setAssets] = useState<ResultFilter[] | []>([]);
+    const [params, setParams] = useState<any>();
 
     const onFilter = async (filter: FilterValues) => {
         const params = {
@@ -51,6 +52,8 @@ const IndexReportPage = ({ buildings }: IProps) => {
             floor: filter.floor?.value,
             room: filter.room?.value,
         };
+
+        setParams(params);
 
         setIsLoading(true);
 
@@ -92,7 +95,9 @@ const IndexReportPage = ({ buildings }: IProps) => {
                                     <RotateCw className="mr-2 h-4 w-4 animate-spin" />
                                 )}
                             </div>
-                            {assets.length > 0 && <Result datas={assets} />}
+                            {assets.length > 0 && (
+                                <Result datas={assets} params={params} />
+                            )}
                         </CardContent>
                     </Card>
                 </div>

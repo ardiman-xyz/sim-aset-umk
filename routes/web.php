@@ -79,6 +79,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix("reports")->group(function () {
         Route::get("/", [\App\Http\Controllers\ReportController::class, 'index'])->name("report.index");
         Route::get("filter", [\App\Http\Controllers\ReportController::class, 'filter'])->name("report.filter");
+        Route::get("print", [\App\Http\Controllers\ReportController::class, 'print'])->name("report.print");
     });
 
 });

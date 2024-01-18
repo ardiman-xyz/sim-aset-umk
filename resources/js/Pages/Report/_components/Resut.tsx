@@ -1,3 +1,4 @@
+import { Button } from "@/Components/ui/button";
 import {
     Table,
     TableBody,
@@ -8,6 +9,8 @@ import {
 } from "@/Components/ui/table";
 import { formatDate } from "@/Helpers/date";
 import { Asset } from "@/types/app";
+import { router } from "@inertiajs/react";
+import { Printer } from "lucide-react";
 
 interface ResultProps {
     datas: {
@@ -16,11 +19,23 @@ interface ResultProps {
         placement_date: string;
         asset: Asset;
     }[];
+
+    params: any;
 }
 
-const Result = ({ datas }: ResultProps) => {
+const Result = ({ datas, params }: ResultProps) => {
+    const handlePrint = () => {
+        return router.get(route("report.print", params));
+    };
+
     return (
         <div>
+            <div className="w-full flex justify-start mb-4">
+                <Button onClick={handlePrint}>
+                    <Printer className="mr-2 h-4 w-4" />
+                    Cetak data
+                </Button>
+            </div>
             <Table className="border">
                 <TableHeader>
                     <TableRow>
