@@ -36,7 +36,9 @@ class AssetController extends Controller
     {
         $assets = Asset::with(['gallery' => function ($query) {
             $query->first();
-        }, 'categories', 'condition'])->orderBy("id", "desc")->get();
+        }, 'categories', 'condition'])
+        ->orderByDesc("created_at")
+        ->get();
 
         $assets = $assets->map(function ($asset) {
             $asset->image = $asset->gallery->first() ? $asset->gallery->first()->file : null;

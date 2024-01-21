@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/data', [DashboardController::class, 'resultData'])->name('dashboard.dt');
 
     Route::prefix("building")->group(function () {
         Route::get("/", [\App\Http\Controllers\BuildingController::class, 'index'])->name("building.index");

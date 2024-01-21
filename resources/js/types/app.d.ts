@@ -83,3 +83,8 @@ export type Placement = {
     };
     room_id: number | null;
 };
+
+export type AssetsPerMonth = {
+    period: string;
+    total_quantity: number;
+};
