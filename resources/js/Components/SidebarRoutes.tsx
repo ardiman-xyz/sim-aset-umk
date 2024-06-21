@@ -1,10 +1,16 @@
 import { SharedInertiaData } from "@/types/inertia";
 import { usePage } from "@inertiajs/react";
 import {
-    ActivitySquare, BaggageClaim,
+    ActivitySquare,
+    BaggageClaim,
     Blocks,
-    Building2, Cctv, ClipboardList, Globe2,
-    Layout, Server, Users,
+    Building2,
+    Cctv,
+    ClipboardList,
+    Globe2,
+    Layout,
+    Server,
+    Users,
 } from "lucide-react";
 import SidebarItem from "@/Components/SiderbarItem";
 
@@ -13,8 +19,8 @@ const Routes1 = [
         icon: Layout,
         label: "Dasbor",
         href: "/dashboard",
-        requiredRoles: ["Admin"]
-    }
+        requiredRoles: ["Admin"],
+    },
 ];
 
 const Routes2 = [
@@ -44,7 +50,6 @@ const Routes2 = [
     },
 ];
 
-
 const Routes3 = [
     {
         icon: Server,
@@ -60,20 +65,20 @@ const Routes3 = [
     },
 ];
 
-const Routes4 = [
-    {
-        icon: Users,
-        label: "Pengguna",
-        href: "/users",
-        requiredRoles: ["Admin"],
-    },
-    {
-        icon: Globe2,
-        label: "website",
-        href: "/web",
-        requiredRoles: ["Admin"],
-    },
-];
+// const Routes4 = [
+//     {
+//         icon: Users,
+//         label: "Pengguna",
+//         href: "/users",
+//         requiredRoles: ["Admin"],
+//     },
+//     {
+//         icon: Globe2,
+//         label: "website",
+//         href: "/web",
+//         requiredRoles: ["Admin"],
+//     },
+// ];
 
 const SidebarRoutes = () => {
     const { auth } = usePage<SharedInertiaData>().props;
@@ -86,7 +91,8 @@ const SidebarRoutes = () => {
                         (!route.requiredRoles ||
                             (auth &&
                                 route.requiredRoles.some(
-                                    (role) => auth.user && auth.roles.includes(role)
+                                    (role) =>
+                                        auth.user && auth.roles.includes(role)
                                 ))) && (
                             <SidebarItem
                                 key={index}
@@ -100,13 +106,16 @@ const SidebarRoutes = () => {
             </div>
 
             <div className="flex flex-col w-full mt-7">
-                <h1 className="pl-6 mb-1 text-xs uppercase font-semibold text-muted-foreground">Master data</h1>
+                <h1 className="pl-6 mb-1 text-xs uppercase font-semibold text-muted-foreground">
+                    Master data
+                </h1>
                 {Routes2.map(
                     (route, index) =>
                         (!route.requiredRoles ||
                             (auth &&
                                 route.requiredRoles.some(
-                                    (role) => auth.user && auth.roles.includes(role)
+                                    (role) =>
+                                        auth.user && auth.roles.includes(role)
                                 ))) && (
                             <SidebarItem
                                 key={index}
@@ -120,13 +129,16 @@ const SidebarRoutes = () => {
             </div>
 
             <div className="flex flex-col w-full mt-7">
-                <h1 className="pl-6 mb-1 text-xs uppercase font-semibold text-muted-foreground">Aktivitas</h1>
+                <h1 className="pl-6 mb-1 text-xs uppercase font-semibold text-muted-foreground">
+                    Aktivitas
+                </h1>
                 {Routes3.map(
                     (route, index) =>
                         (!route.requiredRoles ||
                             (auth &&
                                 route.requiredRoles.some(
-                                    (role) => auth.user && auth.roles.includes(role)
+                                    (role) =>
+                                        auth.user && auth.roles.includes(role)
                                 ))) && (
                             <SidebarItem
                                 key={index}
@@ -139,7 +151,7 @@ const SidebarRoutes = () => {
                 )}
             </div>
 
-            <div className="flex flex-col w-full mt-7">
+            {/* <div className="flex flex-col w-full mt-7">
                 <h1 className="pl-6 mb-1 text-xs uppercase font-semibold text-muted-foreground">Pengaturan</h1>
                 {Routes4.map(
                     (route, index) =>
@@ -157,7 +169,7 @@ const SidebarRoutes = () => {
                             />
                         )
                 )}
-            </div>
+            </div> */}
         </>
     );
 };

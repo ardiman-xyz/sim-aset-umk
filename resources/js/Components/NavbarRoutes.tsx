@@ -7,7 +7,7 @@ import {
 } from "@/Components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Link, router, usePage } from "@inertiajs/react";
-import {SharedInertiaData} from "@/types/inertia";
+import { SharedInertiaData } from "@/types/inertia";
 
 export const NavbarRoutes = () => {
     const { auth, ziggy } = usePage<SharedInertiaData>().props;
@@ -29,7 +29,7 @@ export const NavbarRoutes = () => {
                     </DropdownMenuItem>
                     <DropdownMenuItem
                         onClick={() => {
-                            router.get("/logout");
+                            router.post("/logout");
                         }}
                     >
                         Logout
