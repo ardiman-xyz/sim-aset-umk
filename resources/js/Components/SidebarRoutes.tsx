@@ -5,7 +5,6 @@ import {
     BaggageClaim,
     Blocks,
     Building2,
-    Cctv,
     ClipboardList,
     Globe2,
     Layout,
@@ -19,7 +18,7 @@ const Routes1 = [
         icon: Layout,
         label: "Dasbor",
         href: "/dashboard",
-        requiredRoles: ["Admin"],
+        requiredRoles: ["Admin", "User"],
     },
 ];
 
@@ -28,25 +27,25 @@ const Routes2 = [
         icon: Building2,
         label: "Gedung",
         href: "/building",
-        requiredRoles: ["Admin"],
+        requiredRoles: ["Admin", "User"],
     },
     {
         icon: Blocks,
         label: "Kategori barang",
         href: "/categories",
-        requiredRoles: ["Admin"],
+        requiredRoles: ["Admin", "User"],
     },
     {
         icon: ActivitySquare,
         label: "Kondisi",
         href: "/conditions",
-        requiredRoles: ["Admin"],
+        requiredRoles: ["Admin", "User"],
     },
     {
         icon: BaggageClaim,
         label: "Jenis akuisisi",
         href: "/acquisition-methods",
-        requiredRoles: ["Admin"],
+        requiredRoles: ["Admin", "User"],
     },
 ];
 
@@ -55,30 +54,30 @@ const Routes3 = [
         icon: Server,
         label: "Aset",
         href: "/assets",
-        requiredRoles: ["Admin"],
+        requiredRoles: ["Admin", "User"],
     },
     {
         icon: ClipboardList,
         label: "Laporan",
         href: "/reports",
-        requiredRoles: ["Admin"],
+        requiredRoles: ["Admin", "User"],
     },
 ];
 
-// const Routes4 = [
-//     {
-//         icon: Users,
-//         label: "Pengguna",
-//         href: "/users",
-//         requiredRoles: ["Admin"],
-//     },
-//     {
-//         icon: Globe2,
-//         label: "website",
-//         href: "/web",
-//         requiredRoles: ["Admin"],
-//     },
-// ];
+const Routes4 = [
+    {
+        icon: Users,
+        label: "Pengguna",
+        href: "/users",
+        requiredRoles: ["Admin"],
+    },
+    {
+        icon: Globe2,
+        label: "website",
+        href: "/web",
+        requiredRoles: ["Admin"],
+    },
+];
 
 const SidebarRoutes = () => {
     const { auth } = usePage<SharedInertiaData>().props;
@@ -151,14 +150,17 @@ const SidebarRoutes = () => {
                 )}
             </div>
 
-            {/* <div className="flex flex-col w-full mt-7">
-                <h1 className="pl-6 mb-1 text-xs uppercase font-semibold text-muted-foreground">Pengaturan</h1>
+            <div className="flex flex-col w-full mt-7">
+                <h1 className="pl-6 mb-1 text-xs uppercase font-semibold text-muted-foreground">
+                    Pengaturan
+                </h1>
                 {Routes4.map(
                     (route, index) =>
                         (!route.requiredRoles ||
                             (auth &&
                                 route.requiredRoles.some(
-                                    (role) => auth.user && auth.roles.includes(role)
+                                    (role) =>
+                                        auth.user && auth.roles.includes(role)
                                 ))) && (
                             <SidebarItem
                                 key={index}
@@ -169,7 +171,7 @@ const SidebarRoutes = () => {
                             />
                         )
                 )}
-            </div> */}
+            </div>
         </>
     );
 };

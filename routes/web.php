@@ -88,6 +88,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get("print", [\App\Http\Controllers\ReportController::class, 'print'])->name("report.print");
     });
 
+
+    Route::prefix("users")->group(function () {
+        Route::get("/", [\App\Http\Controllers\UserController::class, 'index'])->name("user.index");
+        Route::post("/", [\App\Http\Controllers\UserController::class, 'store'])->name("user.store");
+    });
+
 });
 
 Route::middleware('auth')->group(function () {
