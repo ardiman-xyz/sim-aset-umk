@@ -66,12 +66,11 @@ export const CreateForm = () => {
 
     const toggleModalAdd = () => {
         setIsOpenModalAdd(!isOpenModalAdd);
-        // form.reset();
+        form.reset();
         setError(null);
     };
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        console.info(values);
         setError(null);
         setIsLoading(true);
         await axios

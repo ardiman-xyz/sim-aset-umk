@@ -88,3 +88,18 @@ export type AssetsPerMonth = {
     period: string;
     total_quantity: number;
 };
+
+export type User = {
+    id: number;
+    name: string;
+    email: string;
+    roles: Role[];
+    created_at: string;
+    updated_at: string;
+};
+
+export type Role = {
+    id: number;
+    name: string;
+    guard_name: string;
+};

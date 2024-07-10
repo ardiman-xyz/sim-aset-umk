@@ -15,8 +15,15 @@ import {
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import { CreateForm } from "./_components/CreateForm";
+import { User } from "@/types/app";
+import { DataTable } from "./_components/DataTable";
+import { columns } from "./_components/column";
 
-const Index = () => {
+interface IndexProps {
+    users: User[];
+}
+
+const Index = ({ users }: IndexProps) => {
     return (
         <Authenticated>
             <Head title="Pengaturan user" />
@@ -33,16 +40,7 @@ const Index = () => {
                     </div>
                 </div>
                 <CardContent>
-                    <Table className="border">
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead className="w-[100px]">No.</TableHead>
-                                <TableHead>Nama</TableHead>
-                                <TableHead>Aksi</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody></TableBody>
-                    </Table>
+                    <DataTable columns={columns} data={users} />
                 </CardContent>
             </Card>
         </Authenticated>
