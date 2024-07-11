@@ -71,12 +71,12 @@ const Routes4 = [
         href: "/users",
         requiredRoles: ["Admin"],
     },
-    {
-        icon: Globe2,
-        label: "website",
-        href: "/web",
-        requiredRoles: ["Admin"],
-    },
+    // {
+    //     icon: Globe2,
+    //     label: "website",
+    //     href: "/web",
+    //     requiredRoles: ["Admin"],
+    // },
 ];
 
 const SidebarRoutes = () => {
