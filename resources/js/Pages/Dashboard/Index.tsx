@@ -14,6 +14,9 @@ export default function Index() {
     const { grouping, setGrouping } = useChartGroupingStore();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [assets, setAssets] = useState<AssetsPerMonth[] | []>([]);
+    const [userCount, setUserCount] = useState<number>(0);
+    const [assetActiveCoount, setAssetActiveCoount] = useState<number>(0);
+    const [totalExpenditures, setTotalExpenditures] = useState<number>(0);
 
     const onToggle = () => {
         if (grouping === "month") {
@@ -28,7 +31,10 @@ export default function Index() {
             setIsLoading(true);
 
             await axios.get("/data?grouping=" + grouping).then(({ data }) => {
-                setAssets(data.data);
+                setAssets(data.assets);
+                setUserCount(data.users);
+                setAssetActiveCoount(data.activeAssets);
+                setTotalExpenditures(data.totalExpenditures);
             });
 
             setIsLoading(false);
@@ -52,7 +58,11 @@ export default function Index() {
                 <h1 className="font-medium text-2xl">Admin Dashboard</h1>
 
                 <div className="mt-4">
-                    <Cards />
+                    <Cards
+                        userCount={userCount}
+                        assetCount={assetActiveCoount}
+                        totalExpenditures={totalExpenditures}
+                    />
                 </div>
 
                 <div className="w-full flex items-center justify-between mt-5">
