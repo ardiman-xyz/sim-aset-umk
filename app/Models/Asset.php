@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Asset extends Model
 {
@@ -31,6 +32,13 @@ class Asset extends Model
     public function gallery(): HasMany
     {
         return $this->hasMany(Gallery::class);
+    }
+
+    protected function imageUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->gallery()->first()->file ?? 'default-image-url.jpg'
+        );
     }
 
     public function categories(): BelongsToMany
